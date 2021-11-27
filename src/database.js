@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 
 
-let db;
 export async function connectDB(){
-    return mongoose.connect(process.env.HOST_PORT,{
+    return mongoose.connect(process.env.DB_HOST,{
     useNewUrlParser:true,
     useUnifiedTopology:true,
     })
 }
+let db;
