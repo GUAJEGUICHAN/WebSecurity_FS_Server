@@ -1,7 +1,11 @@
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
+import { connectDB } from "./database.js";
+import mongoose from "mongoose";
+import dotenv from 'dotenv'
 const app = express();
+dotenv.config();
 app.use(bodyParser.json());
 
 app.use(
@@ -27,3 +31,13 @@ app.post("/post", (req, res, next) => {
 app.listen(5050, () => {
   console.log("I'm fine");
 });
+
+connectDB().then(()=>{
+  console.log("init!")
+  const server = app.listen(process.env.HOST_PORT);
+}).catch(console.error)
+
+const userSchema = new mongoose.Schema({
+  id:{type:String, required:true},
+  pw:{type:String, required:true},
+})
